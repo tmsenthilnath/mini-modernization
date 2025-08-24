@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: profile-service
+  template:
+    metadata:
+      labels:
+        app: profile-service
+    spec:
+      containers:
+        - name: profile-service
+          image: 154473397568.dkr.ecr.us-east-1.amazonaws.com/profile-service:latest  # Replace with your actual ECR image URL
+          ports:
+            - containerPort: 80
+          env:
+            - name: DB_HOST
+              value: mini-db.cluster-c6b0oeyos3hl.us-east-1.rds.amazonaws.com           # Replace with your actual RDS endpoint
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: mini-db                             # Replace accordingly
+            - name: DB_USER
+              value: postgres                         # Replace accordingly
+            - name: DB_PASSWORD
+              value: Xy7!gLz#29RmTqW&
+
